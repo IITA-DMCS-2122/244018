@@ -2,7 +2,7 @@ package pl.lodz.dmcs.javaee.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.lodz.dmcs.javaee.model.TodoItem;
+import pl.lodz.dmcs.javaee.model.entities.TodoItemEntity;
 import pl.lodz.dmcs.javaee.services.TodoItemService;
 
 import java.util.List;
@@ -15,13 +15,13 @@ public class TodoItemController {
     TodoItemService todoItemService;
 
     @GetMapping("/")
-    public List<TodoItem> getAllTodoItems() {
+    public List<TodoItemEntity> getAllTodoItems() {
         return todoItemService.getAllTodoItems();
     }
 
     @GetMapping("/{id}")
-    public TodoItem getTodoItem(@PathVariable String id) {
-        TodoItem todoItem = null;
+    public TodoItemEntity getTodoItem(@PathVariable String id) {
+        TodoItemEntity todoItem = null;
         try {
             todoItem = todoItemService.getTodoItem(Long.parseLong(id));
         } catch (Exception e) {
@@ -31,12 +31,12 @@ public class TodoItemController {
     }
 
     @PutMapping("/")
-    public void addNewTodoItem(@RequestBody TodoItem todoItem) {
+    public void addNewTodoItem(@RequestBody TodoItemEntity todoItem) {
         todoItemService.addNewTodoItem(todoItem);
     }
 
     @PostMapping("/")
-    public void editTodoItem(@RequestBody TodoItem todoItem) {
+    public void editTodoItem(@RequestBody TodoItemEntity todoItem) {
         try {
             todoItemService.editTodoItem(todoItem);
         } catch (Exception e) {

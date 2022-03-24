@@ -1,17 +1,17 @@
 package pl.lodz.dmcs.javaee.services;
 
-import pl.lodz.dmcs.javaee.model.TodoItem;
+import pl.lodz.dmcs.javaee.model.entities.TodoItemEntity;
 
 import java.util.List;
 
 public interface TodoItemService {
-    void addNewTodoItem(TodoItem todoItem);
+    void addNewTodoItem(TodoItemEntity todoItem);
 
     void deleteTodoItem(Long todoItemId) throws Exception;
 
-    void editTodoItem(TodoItem todoItem) throws Exception;
+    void editTodoItem(TodoItemEntity todoItem) throws Exception;
 
-    List<TodoItem> getAllTodoItems();
+    List<TodoItemEntity> getAllTodoItems();
 
-    TodoItem getTodoItem(Long todoItemId) throws Exception;
+    TodoItemEntity getTodoItem(Long todoItemId) throws Exception;
 }
