@@ -2,10 +2,7 @@ package pl.lodz.dmcs.javaee.model.analytics;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -18,6 +15,7 @@ public class TodoItemAnalyticsEntity {
     private Long id;
     private Boolean isDone;
     private String description;
+    @Column(unique = true)
     private String uuid;
     private LocalDateTime timestamp;
 

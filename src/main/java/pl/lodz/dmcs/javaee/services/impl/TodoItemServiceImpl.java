@@ -1,5 +1,6 @@
 package pl.lodz.dmcs.javaee.services.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.lodz.dmcs.javaee.model.entities.TodoItemEntity;
@@ -9,11 +10,14 @@ import pl.lodz.dmcs.javaee.repositories.entities.TodoItemsRepository;
 import pl.lodz.dmcs.javaee.services.TodoItemService;
 import pl.lodz.dmcs.javaee.utils.TodoItemConverter;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@Transactional
 public class TodoItemServiceImpl implements TodoItemService {
+
     @Autowired
     private TodoItemsRepository todoItemsRepository;
 
@@ -53,5 +57,10 @@ public class TodoItemServiceImpl implements TodoItemService {
     @Override
     public TodoItemEntity getTodoItem(Long todoItemId) throws Exception {
         return todoItemsRepository.findById(todoItemId).orElseThrow(Exception::new);
+    }
+
+    @Override
+    public List<TodoItemEntity> getAllTodoItemsBySearchPhrase(String searchPhrase) {
+        return todoItemsRepository.search(searchPhrase);
     }
 }

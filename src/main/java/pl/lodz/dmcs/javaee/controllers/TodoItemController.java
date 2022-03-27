@@ -1,6 +1,8 @@
 package pl.lodz.dmcs.javaee.controllers;
 
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.lodz.dmcs.javaee.model.entities.TodoItemEntity;
 import pl.lodz.dmcs.javaee.services.TodoItemService;
@@ -15,19 +17,24 @@ public class TodoItemController {
     TodoItemService todoItemService;
 
     @GetMapping("/")
-    public List<TodoItemEntity> getAllTodoItems() {
-        return todoItemService.getAllTodoItems();
+    public ResponseEntity<List<TodoItemEntity>> getAllTodoItems() {
+        return ResponseEntity.ok(todoItemService.getAllTodoItems());
     }
 
     @GetMapping("/{id}")
-    public TodoItemEntity getTodoItem(@PathVariable String id) {
+    public ResponseEntity<TodoItemEntity> getTodoItem(@PathVariable String id) {
         TodoItemEntity todoItem = null;
         try {
             todoItem = todoItemService.getTodoItem(Long.parseLong(id));
         } catch (Exception e) {
             System.out.println("ERROR PARSING LONG");
         }
-        return todoItem;
+        return ResponseEntity.ok(todoItem);
+    }
+
+    @GetMapping("/search/{search}")
+    public ResponseEntity<List<TodoItemEntity>> searchTodoItem(@PathVariable String search) {
+        return ResponseEntity.ok(todoItemService.getAllTodoItemsBySearchPhrase(search));
     }
 
     @PutMapping("/")

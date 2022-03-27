@@ -14,4 +14,6 @@ public interface TodoItemService {
     List<TodoItemEntity> getAllTodoItems();
 
     TodoItemEntity getTodoItem(Long todoItemId) throws Exception;
+
+    List<TodoItemEntity> getAllTodoItemsBySearchPhrase(String searchPhrase);
 }
